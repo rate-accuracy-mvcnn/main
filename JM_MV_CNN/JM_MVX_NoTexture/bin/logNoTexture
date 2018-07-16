@@ -1,0 +1,58 @@
+Setting Default Parameters...
+Parsing Configfile encoder.cfg.............................................................................................................................................................................................................................................................................................................................................................................................................................
+Parsing Configfile encoder_option2.cfg.............................................................................................................................................................................................................................................................................................................................................................................................................................
+Parsing command line string 'InputFile = ./vid/JMInputVideo.yuv'.
+Parsing command line string 'QPISlice = 30'.
+Parsing command line string 'QPPSlice = 30'.
+Parsing command line string 'SearchRange = 16'.
+Parsing command line string 'FramesToBeEncoded = 30000'.
+Parsing command line string 'OutputFile = ./vid/JMEncodedVideo.264'.
+
+------------------------------- JM 19.0 (FRExt) -------------------------------
+ Input YUV file                    : ./vid/JMInputVideo.yuv 
+ Output H.264 bitstream            : ./vid/JMEncodedVideo.264 
+ Output YUV file                   : test_rec.yuv 
+ YUV Format                        : YUV 4:2:0 
+ Frames to be encoded              : 30000
+ Freq. for encoded bitstream       : 25.00
+ PicInterlace / MbInterlace        : 0/0
+ Transform8x8Mode                  : 1
+ ME Metric for Refinement Level 0  : SAD
+ ME Metric for Refinement Level 1  : Hadamard SAD
+ ME Metric for Refinement Level 2  : Hadamard SAD
+ Mode Decision Metric              : Hadamard SAD
+ Motion Estimation for components  : YCbCr
+ Image format                      : 320x240 (320x240)
+ Error robustness                  : Off
+ Search range                      : 16
+ Total number of references        : 3
+ References for P slices           : 3
+ References for B slices (L0, L1)  : 3, 1
+ Sequence type                     : IPPP (QP: I 30, P 30) 
+ Entropy coding method             : CAVLC
+ Profile/Level IDC                 : (100,40)
+ Motion Estimation Scheme          : EPZS
+ EPZS Pattern                      : Extended Diamond
+ EPZS Dual Pattern                 : Extended Diamond
+ EPZS Fixed Predictors             : Aggressive
+ EPZS Aggressive Predictors        : Disabled
+ EPZS Temporal Predictors          : Enabled
+ EPZS Spatial Predictors           : Enabled
+ EPZS Threshold Multipliers        : (1 0 2)
+ EPZS Subpel ME                    : Basic
+ EPZS Subpel ME BiPred             : Basic
+ Search range restrictions         : none
+ RD-optimized mode decision        : not used
+ Data Partitioning Mode            : 1 partition 
+ Output File Format                : H.264/AVC Annex B Byte Stream Format 
+-------------------------------------------------------------------------------
+Frame     Bit/pic    QP   SnrY    SnrU    SnrV    Time(ms) MET(ms) Frm/Fld Ref  
+-------------------------------------------------------------------------------
+00000(NVB)     176 
+00000(IDR)    9888   30  37.605  44.055  40.765        31       0    FRM    3
+00001( P )    2544   30  37.913  43.968  40.799        95      49    FRM    2
+00002( P )    1808   30  37.919  43.940  40.698       139      92    FRM    2
+00003( P )    3384   30  37.700  43.669  40.510       240     171    FRM    2
+00004( P )    2168   30  37.724  43.717  40.534       182     135    FRM    2
+00005( P )    3384   30  37.144  42.919  39.919       184     137    FRM    2
+00006( P )    1912   30  37.169  42.929  39.864       194     147    FRM    2

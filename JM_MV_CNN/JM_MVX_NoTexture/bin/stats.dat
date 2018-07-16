@@ -1,0 +1,92 @@
+ -------------------------------------------------------------- 
+  This file contains statistics for the last encoded sequence   
+ -------------------------------------------------------------- 
+ Sequence                     : ./vid/JMInputVideo.yuv
+ No.of coded pictures         :   53
+ Freq. for encoded bitstream  :   25
+ I Slice Bitrate(kb/s)        :   6.60
+ P Slice Bitrate(kb/s)        : 301.36
+ B Slice Bitrate(kb/s)        :   0.00
+ Total Bitrate(kb/s)          : 308.04
+ ME Level 0 Metric            : SAD
+ ME Level 1 Metric            : Hadamard SAD
+ ME Level 2 Metric            : Hadamard SAD
+ Mode Decision Metric         : Hadamard SAD
+ ME for components            : YCbCr
+ Image format                 : 320x240
+ Error robustness             : Off
+ Search range                 : 16
+ Total number of references   : 3
+ References for P slices      : 3
+ Profile/Level IDC            : (100,40)
+ Entropy coding method        : CAVLC
+ EPZS Pattern                 : Extended Diamond
+ EPZS Dual Pattern            : Extended Diamond
+ EPZS Fixed Predictors        : Aggressive
+ EPZS Aggressive Predictors   : Disabled
+ EPZS Temporal Predictors     : Enabled
+ EPZS Spatial Predictors      : Enabled
+ EPZS Threshold Multipliers   : (1 0 2)
+ EPZS Subpel ME               : Basic
+ EPZS Subpel ME BiPred        : Basic
+ Search range restrictions    : none
+ RD-optimized mode decision   : not used
+
+ ---------------------|----------------|---------------|
+     Item             |     Intra      |   All frames  |
+ ---------------------|----------------|---------------|
+ SNR Y(dB)            | 68.93          | 65.86         |
+ SNR U/V (dB)         | 68.79/70.36    | 66.29/66.55   |
+ ---------------------|----------------|---------------|
+
+ ---------------------|----------------|---------------|---------------|
+     SNR              |        I       |       P       |       B       |
+ ---------------------|----------------|---------------|---------------|
+ SNR Y(dB)            |      68.929    |     65.801    |     0.000    |
+ SNR U(dB)            |      68.789    |     66.244    |     0.000    |
+ SNR V(dB)            |      70.357    |     66.476    |     0.000    |
+ ---------------------|----------------|---------------|---------------|
+
+ ---------------------|----------------|---------------|---------------|
+     Ave Quant        |        I       |       P       |       B       |
+ ---------------------|----------------|---------------|---------------|
+        QP            |      0.000    |     0.000    |     0.000    |
+ ---------------------|----------------|---------------|---------------|
+
+ ---------------------|----------------|
+   Intra              |   Mode used    |
+ ---------------------|----------------|
+ Mode 0  intra 4x4    |    279         |
+ Mode 1  intra 8x8    |     17         |
+ Mode 2+ intra 16x16  |      4         |
+ Mode    intra IPCM   |      0         |
+ ---------------------|----------------|-----------------|
+   P Slice            |   Mode used    | MotionInfo bits |
+ ---------------------|----------------|-----------------|
+ Mode  0  (copy)      |    810         |        0.00     |
+ Mode  1  (16x16)     |   5282         |      454.29     |
+ Mode  2  (16x8)      |    743         |      207.88     |
+ Mode  3  (8x16)      |   1863         |      570.96     |
+ Mode  4  (8x8)       |   5912         |     5648.46     |
+ Mode  5  intra 4x4   |    685         |-----------------|
+ Mode  6  intra 8x8   |    147         |
+ Mode  7+ intra 16x16 |    158         |
+ Mode     intra IPCM  |      0         |
+ ---------------------|----------------|
+
+ ---------------------|----------------|----------------|----------------|----------------|
+  Bit usage:          |      Intra     |      Inter     |    B frame     |    SP frame    |
+ ---------------------|----------------|----------------|----------------|----------------|
+ Header               |      43.00     |      74.62     |       0.00     |
+ Mode                 |   12959.00     |    3059.69     |       0.00     |
+ Motion Info          |        ./.     |    6881.60     |       0.00     |
+ CBP Y/C              |     640.00     |    1942.62     |       0.00     |
+ Coeffs. Y            |       0.00     |       0.00     |       0.00     |       0.00     |
+ Coeffs. C            |       0.00     |       0.00     |       0.00     |       0.00     |
+ Coeffs. CB           |       0.00     |       0.00     |       0.00     |       0.00     |
+ Coeffs. CR           |       0.00     |       0.00     |       0.00     |       0.00     |
+ Delta quant          |     300.00     |     284.15     |       0.00     |
+ Stuffing Bits        |       2.00     |       4.60     |       0.00     |
+ ---------------------|----------------|----------------|----------------|
+ average bits/frame   |   13944.00     |   12247.27     |       0.00     |
+ ---------------------|----------------|----------------|----------------|

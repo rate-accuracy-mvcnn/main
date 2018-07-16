@@ -1,0 +1,84 @@
+#!/bin/bash
+clear
+cd ..
+
+#%%% Must edit
+enc_cfg=encoder_option2.cfg	#JM encoder configuration file [encoder_option16.cfg, encoder_option2.cfg, encoder_option2_YUV444.cfg, ...]
+VideoSet="UCF"			#Video Set; UCF, HMDB
+ColorSpace="420P"		#Color Space 420P or 444P
+QPISlice=51 			#value [0 - 51]
+QPPSlice=51 			#value [0 - 51]
+SearchRange=16			#value [16,32,64]
+mbmapXxX=8			#value [8,16]
+SetType="train"			#value [0:Train Set,1: Test Set]
+TTSet=01			#UCF-101 Split Set [01 02 03]
+IndexFirstVideo=0		#Index of first video to be encoded [1,2, .... ]
+NumVideos=2			#Number of Video files to be encoded
+Overwrite=1			#Overwrite any exisitng MV files in the directory
+StrComment="A"			#Comment to be added at the end of the directory that will be made (if doesn't exist) to contain the output MVs
+
+#%%%%%
+N=1; 				#Number of Parallel Processes 
+#%%%%
+
+cnt=$IndexFirstVideo;
+Inc=$((NumVideos/N));
+Inc2=$((NumVideos%N));
+if [ $Inc2 -gt 0 ];
+then
+echo "Number of Videos % Number of Multiple Processes != 0"
+fi
+
+i=1;
+while [ $i -le $N ]
+do 
+if [ -e JM_MV_CNN$i ]
+then
+rm -rf JM_MV_CNN$i
+fi
+if [ -e JM_MV_CNN$i ]
+then
+echo "cann't remove JM_MV_CNN$i to start a fresh coding, try to remove it and then run the code again"
+exit -1; 
+fi
+
+cp -R JM_MV_CNN/ JM_MV_CNN$i &
+i=$((i+1));
+done
+wait
+
+i=1
+while [ $i -le $N ]
+do
+if [ $i -eq $N ]
+then
+Inc=$((NumVideos + IndexFirstVideo - cnt));
+fi
+cd ./JM_MV_CNN$i
+if [ $VideoSet = "UCF" ]
+then
+     ./GenerateAndComputeSizeRatio-UCF-Split-1 -ecfg=$enc_cfg -qp=$QPISlice -sr=$SearchRange -res=$mbmapXxX -settype=$SetType -sset=$TTSet -ifvid=$cnt -nvid=$Inc -ow=$Overwrite -strcom=$StrComment &
+else
+if [ $VideoSet = "HMDB" ]
+then
+     ./GenerateAndComputeSizeRatio-HMDB-Split-1 -ecfg=$enc_cfg -qp=$QPISlice -sr=$SearchRange -res=$mbmapXxX -settype=$SetType -sset=$TTSet -ifvid=$cnt -nvid=$Inc -ow=$Overwrite -strcom=$StrComment &
+else
+ echo "Video Set is undefined"
+ fi
+fi
+cnt=$((cnt+Inc));
+i=$((i+1));
+cd ..
+done
+wait
+
+i=1;
+while [ $i -le $N ]
+do
+rm -rf JM_MV_CNN$i &
+i=$((i+1));
+done
+wait
+
+#To rename all JMMV*.bin file names to rgb24*.bin file names. This must be executed inside the MVs directory 
+#find . -name '*.bin' -exec bash -c ' mv $0 ${0/\JMMV/rgb24}' {} \;
