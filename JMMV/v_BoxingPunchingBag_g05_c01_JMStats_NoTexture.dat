@@ -1,0 +1,165 @@
+ -------------------------------------------------------------- 
+  This file contains statistics for the last encoded sequence   
+ -------------------------------------------------------------- 
+ Sequence                     : ./vid/JMInputVideo.yuv
+ No.of coded pictures         :    0
+ Freq. for encoded bitstream  :   25
+ I Slice Bitrate(kb/s)        :   -nan
+ P Slice Bitrate(kb/s)        :   -nan
+ B Slice Bitrate(kb/s)        :   -nan
+ Total Bitrate(kb/s)          :   -nan
+ ME Level 0 Metric            : SAD
+ ME Level 1 Metric            : Hadamard SAD
+ ME Level 2 Metric            : Hadamard SAD
+ Mode Decision Metric         : Hadamard SAD
+ ME for components            : YCbCr
+ Image format                 : 320x240
+ Error robustness             : Off
+ Search range                 : 16
+ Total number of references   : 3
+ References for P slices      : 3
+ Profile/Level IDC            : (100,40)
+ Entropy coding method        : CAVLC
+ EPZS Pattern                 : Extended Diamond
+ EPZS Dual Pattern            : Extended Diamond
+ EPZS Fixed Predictors        : Aggressive
+ EPZS Aggressive Predictors   : Disabled
+ EPZS Temporal Predictors     : Enabled
+ EPZS Spatial Predictors      : Enabled
+ EPZS Threshold Multipliers   : (1 0 2)
+ EPZS Subpel ME               : Basic
+ EPZS Subpel ME BiPred        : Basic
+ Search range restrictions    : none
+ RD-optimized mode decision   : not used
+
+ ---------------------|----------------|---------------|
+     Item             |     Intra      |   All frames  |
+ ---------------------|----------------|---------------|
+ SNR Y(dB)            |  0.00          |  0.00         |
+ SNR U/V (dB)         |  0.00/ 0.00    |  0.00/ 0.00   |
+ ---------------------|----------------|---------------|
+
+ ---------------------|----------------|---------------|---------------|
+     SNR              |        I       |       P       |       B       |
+ ---------------------|----------------|---------------|---------------|
+ SNR Y(dB)            |      0.000    |     0.000    |     0.000    |
+ SNR U(dB)            |      0.000    |     0.000    |     0.000    |
+ SNR V(dB)            |      0.000    |     0.000    |     0.000    |
+ ---------------------|----------------|---------------|---------------|
+
+ ---------------------|----------------|---------------|---------------|
+     Ave Quant        |        I       |       P       |       B       |
+ ---------------------|----------------|---------------|---------------|
+        QP            |      0.000    |     0.000    |     0.000    |
+ ---------------------|----------------|---------------|---------------|
+
+ ---------------------|----------------|
+   Intra              |   Mode used    |
+ ---------------------|----------------|
+ Mode 0  intra 4x4    |      0         |
+ Mode 1  intra 8x8    |      0         |
+ Mode 2+ intra 16x16  |      0         |
+ Mode    intra IPCM   |      0         |
+ ---------------------|----------------|
+
+ ---------------------|----------------|----------------|----------------|----------------|
+  Bit usage:          |      Intra     |      Inter     |    B frame     |    SP frame    |
+ ---------------------|----------------|----------------|----------------|----------------|
+ Header               |       -nan     |       0.00     |       0.00     |
+ Mode                 |       -nan     |       0.00     |       0.00     |
+ Motion Info          |        ./.     |       0.00     |       0.00     |
+ CBP Y/C              |       -nan     |       0.00     |       0.00     |
+ Coeffs. Y            |       -nan     |       0.00     |       0.00     |       0.00     |
+ Coeffs. C            |       -nan     |       0.00     |       0.00     |       0.00     |
+ Coeffs. CB           |       -nan     |       0.00     |       0.00     |       0.00     |
+ Coeffs. CR           |       -nan     |       0.00     |       0.00     |       0.00     |
+ Delta quant          |       -nan     |       0.00     |       0.00     |
+ Stuffing Bits        |       -nan     |       0.00     |       0.00     |
+ ---------------------|----------------|----------------|----------------|
+ average bits/frame   |       -nan     |       0.00     |       0.00     |
+ ---------------------|----------------|----------------|----------------|
+-rw-r--r-- 1 root root 22 Sep 27 14:26 ./vid/JMEncodedVideo.264
+Setting Default Parameters...
+Parsing Configfile encoder.cfg.............................................................................................................................................................................................................................................................................................................................................................................................................................
+Parsing Configfile encoder_option2.cfg.............................................................................................................................................................................................................................................................................................................................................................................................................................
+Parsing command line string 'InputFile = ./vid/JMInputVideo.yuv'.
+Parsing command line string 'QPISlice = 40'.
+Parsing command line string 'QPPSlice = 40'.
+Parsing command line string 'SearchRange = 16'.
+Parsing command line string 'FramesToBeEncoded = 30000'.
+Parsing command line string 'OutputFile = ./vid/JMEncodedVideo.264'.
+
+------------------------------- JM 19.0 (FRExt) -------------------------------
+ Input YUV file                    : ./vid/JMInputVideo.yuv 
+ Output H.264 bitstream            : ./vid/JMEncodedVideo.264 
+ Output YUV file                   : test_rec.yuv 
+ YUV Format                        : YUV 4:2:0 
+ Frames to be encoded              : 30000
+ Freq. for encoded bitstream       : 25.00
+ PicInterlace / MbInterlace        : 0/0
+ Transform8x8Mode                  : 1
+ ME Metric for Refinement Level 0  : SAD
+ ME Metric for Refinement Level 1  : Hadamard SAD
+ ME Metric for Refinement Level 2  : Hadamard SAD
+ Mode Decision Metric              : Hadamard SAD
+ Motion Estimation for components  : YCbCr
+ Image format                      : 320x240 (320x240)
+ Error robustness                  : Off
+ Search range                      : 16
+ Total number of references        : 3
+ References for P slices           : 3
+ References for B slices (L0, L1)  : 3, 1
+ Sequence type                     : IPPP (QP: I 40, P 40) 
+ Entropy coding method             : CAVLC
+ Profile/Level IDC                 : (100,40)
+ Motion Estimation Scheme          : EPZS
+ EPZS Pattern                      : Extended Diamond
+ EPZS Dual Pattern                 : Extended Diamond
+ EPZS Fixed Predictors             : Aggressive
+ EPZS Aggressive Predictors        : Disabled
+ EPZS Temporal Predictors          : Enabled
+ EPZS Spatial Predictors           : Enabled
+ EPZS Threshold Multipliers        : (1 0 2)
+ EPZS Subpel ME                    : Basic
+ EPZS Subpel ME BiPred             : Basic
+ Search range restrictions         : none
+ RD-optimized mode decision        : not used
+ Data Partitioning Mode            : 1 partition 
+ Output File Format                : H.264/AVC Annex B Byte Stream Format 
+-------------------------------------------------------------------------------
+Frame     Bit/pic    QP   SnrY    SnrU    SnrV    Time(ms) MET(ms) Frm/Fld Ref  
+-------------------------------------------------------------------------------
+read_one_frame: cannot read 320 bytes from input file, unexpected EOF!
+
+Incorrect FramesToBeEncoded: actual number is      0 frames!
+-------------------------------------------------------------------------------
+ Total Frames:  0 
+ Leaky BucketRateFile does not have valid entries.
+ Using rate calculated from avg. rate 
+ Number Leaky Buckets: 8 
+     Rmin     Bmin     Fmin 
+        0        0        0 
+        0        0        0 
+        0        0        0 
+        0        0        0 
+        0        0        0 
+        0        0        0 
+        0        0        0 
+        0        0        0 
+------------------ Average data all frames  -----------------------------------
+
+ Total encoding time for the seq.  :   0.000 sec (-nan fps)
+ Total ME time for sequence        :   0.000 sec 
+
+ Y { PSNR (dB), cSNR (dB), MSE }   : {   0.000,  96.984,   0.00000 }
+ U { PSNR (dB), cSNR (dB), MSE }   : {   0.000,  90.964,   0.00000 }
+ V { PSNR (dB), cSNR (dB), MSE }   : {   0.000,  90.964,   0.00000 }
+
+ Total bits                        : 0 (I 0, P 0, NVB 0) 
+ Bit rate (kbit/s)  @ 25.00 Hz     :  -nan
+ Bits to avoid Startcode Emulation : 0 
+ Bits for parameter sets           : 0 
+ Bits for filler data              : 0 
+
+-------------------------------------------------------------------------------
+Exit JM 19 (FRExt) encoder ver 19.0 

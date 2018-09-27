@@ -1,0 +1,193 @@
+#!/bin/bash
+#clear
+
+# Set initial default parameters
+enc_cfg=encoder_option2.cfg		#JM encoder configuration file
+QPISlice=40 			#value [0 - 51]
+QPPSlice=40 			#value [0 - 51]
+SearchRange=16			#value [16,32,64]
+mbmapXxX=8			#value [8,16]
+SourceVid='v_BoxingPunchingBag_g05_c01.avi' #Source Video to be used to produce cropped bitstream, MVs, and stast file
+Width=320
+Height=240
+
+
+## Parsing Command Line Parameters
+## cmd exmaple: ./Generate-Split-1 -ecfg=encoder.cfg -qp=25 -sr=16 -res=4 -settype=test sset=01 -ifvid=1 -nvid=5 -strcom=Opt1a
+for i in "$@"
+do
+case $i in
+    -ecfg=*|--ecfg=*)
+    enc_cfg="${i#*=}"
+    shift
+    ;;
+    -qp=*|--qp=*)
+    QPISlice="${i#*=}"
+    QPPSlice="${i#*=}"
+    shift
+    ;;
+    -sr=*|--sr=*)
+    SearchRange="${i#*=}"
+    shift
+    ;;
+    -res=*|--res=*)
+    mbmapXxX="${i#*=}"
+    shift
+    ;;
+    -svid=*|--svid=*)
+    SourceVid="${i#*=}"
+    shift
+    ;;
+    -w=*|--w=*)
+    Width="${i#*=}"
+    shift
+    ;;
+    -h=*|--h=*)
+    Height="${i#*=}"
+    shift
+    ;;
+    *)
+          # unknown option
+    ;;
+esac
+done
+#### End Parsing Command Line Parameters
+
+# Hardcoded Parameters
+NumFrame=30000
+
+#%%%%%%%%%% Hidder General Info
+echo %########################################################################################
+echo "JM config file=${enc_cfg}, Source Video=$SourceVid, QP=$QPISlice, Search Range=$SearchRange, MV Resolution=$mbmapXxX"  
+echo %########################################################################################
+
+rm ./JM_MVX_NoTexture/bin/vid/JMInputVideo.yuv
+echo "Converting source video to YUV format"
+ffmpeg -loglevel panic -i $SourceVid -vf scale=$Width:$Height -vcodec rawvideo -pix_fmt yuv420p './JM_MVX_NoTexture/bin/vid/JMInputVideo.yuv' > /dev/null
+cp -f ./JM_MVX_NoTexture/bin/vid/JMInputVideo.yuv ./JM_MVX/bin/vid/ > /dev/null
+cd JM_MVX_NoTexture/bin
+
+if [ ! -e "./vid/JMInputVideo.yuv" ] ; then
+echo "Problem with ffmpeg while converting $AbsFileName to yuv, ./vid/JMInputVideo.yuv is not generated"
+break
+fi
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#%%%%%%%%%%%%%%%%% Encoding and Decoding using NoTexture JM %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#%%%%%%%%%% Encoding FileName from .yuv to .264 using JM encoder"
+if [ ! -e "$enc_cfg" ] ; then
+echo "$enc_cfg" "doesn't exit"
+break
+fi
+
+if [ -e "./vid/JMEncodedVideo.264" ] ; then
+rm ./vid/JMEncodedVideo.264
+fi
+
+rm -rf ./FrameStats.dat
+echo "Producing cropped H.264 bitstream (encoder)" 
+./lencod.exe -f $enc_cfg -p InputFile="./vid/JMInputVideo.yuv" -p QPISlice=$QPISlice -p QPPSlice=$QPPSlice -p SearchRange=$SearchRange -p FramesToBeEncoded=$NumFrame -p OutputFile="./vid/JMEncodedVideo.264" > logNoTexture
+
+if [ ! -e "./vid/JMEncodedVideo.264" ] ; then
+echo "Problem with encoding [$SourceVid] yuv to 264, ./vid/JMEncodedVideo.264 is not generated"
+break
+fi
+
+SizeNoTexture=`ls -la ./vid/JMEncodedVideo.264` #% to display the size of file
+echo $SizeNoTexture >> stats.dat
+cat logNoTexture >> stats.dat
+
+#%%%%%%%%%% Decoding FileName from .264 to .yuv using JM decoder"
+rm mv.bin > /dev/null 2>&1
+rm ./vid/JMDecodedVideo.yuv
+echo "Extracting MVs from the cropped H.264 bitstream (decoder)" 
+./ldecod.exe -f decoder.cfg -p InputFile="./vid/JMEncodedVideo.264" -p OutputFile="./vid/JMDecodedVideo.yuv" > /dev/null
+
+if [ ! -e "./vid/JMDecodedVideo.yuv" ] ; then
+echo "Problem with decoding [$SourceVid].264 to yuv, ./vid/JMDecodedVideo.yuv is not generated"
+break
+fi
+
+#%%%%%%%%%%%%%%%%% Encoding and Decoding using Original JM %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#%%%%%%%%%%%% copying yuv video files and config files from NoTexture JM directory to Original JM directory %%%%%%%%%%%%%%%%%%
+rm ../../JM_MVX/bin/vid/JMInputVideo.yuv
+cp -f ./vid/JMInputVideo.yuv ../../JM_MVX/bin/vid/. > /dev/null
+if [ ! -e "../../JM_MVX/bin/vid/JMInputVideo.yuv" ] ; then
+echo "Problem with copying the $SourceVid yuv file from JM_MV_NoTexture directory to JM_MV directory, ../../JM_MVX/bin/vid/JMInputVideo.yuv is not copied"
+break
+fi
+
+rm ../../JM_MVX/bin/$enc_cfg
+cp -f ./$enc_cfg ../../JM_MVX/bin/. > /dev/null
+if [ ! -e "../../JM_MVX/bin/$enc_cfg" ] ; then
+echo "Copying $enc_cfg from JM_MV_NoTexture directory to JM_MV directory failed"
+break
+fi
+
+#%%%%%%%%%% Encoding FileName from .yuv to .264 using JM encoder"
+cd ../../JM_MVX/bin #% move to the Original JM Directory
+
+if [ ! -e "$enc_cfg" ] ; then
+echo "$enc_cfg" "doesn't exit"
+break
+fi
+
+if [ -e "./vid/JMEncodedVideo.264" ] ; then
+rm ./vid/JMEncodedVideo.264
+fi
+
+rm -rf ./FrameStats.dat
+echo "Original JM: encoding to produce rate (bps) per frame (optional: for comparsion purposes) " 
+./lencod.exe -f $enc_cfg -p InputFile="./vid/JMInputVideo.yuv" -p QPISlice=$QPISlice -p QPPSlice=$QPPSlice -p SearchRange=$SearchRange -p FramesToBeEncoded=$NumFrame -p OutputFile="./vid/JMEncodedVideo.264" > logOrig #> /dev/null
+
+if [ ! -e "./vid/JMEncodedVideo.264" ] ; then
+echo "Problem with encoding [$SourceVid] yuv to 264, ./vid/JMEncodedVideo.264 is not generated"
+break
+fi
+
+SizeOrig=`ls -la ./vid/JMEncodedVideo.264`  #% to display the size of file
+echo $SizeOrig >> stats.dat
+cat logOrig >> stats.dat
+
+cd ../../JM_MVX_NoTexture/bin #% moveing back to the Original JM Directory
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+#%%%%%%%%%% Mapping MV to Macroblocks (make grid) and make them in a format suitable as input to classifier (Training/Testing)"
+echo "Mapping MV to a grid according to Macroblocks positions"
+rm ../../mbmap/mv_dec.bin
+mv -f mv.bin ../../mbmap/mv_dec.bin
+cd ../../mbmap
+if [ $mbmapXxX -eq 8 ] || [ $mbmapXxX -eq 4 ];
+then
+./mbmap -h 240 -w 320 -$mbmapXxX -o JMMV_mbmap.bin mv_dec.bin > /dev/null
+else
+ ./mbmap -h 240 -w 320 -o JMMV_mbmap.bin mv_dec.bin > /dev/null
+fi
+
+if [ ! -e "./JMMV_mbmap.bin" ] ; then
+echo "Mapping MV to Macroblocks (Grid of MVs) for [$SourceVid], ./JMMV_mbmap.bin is not generated"
+break
+fi
+
+#%%%%%%%%%% Check if directory exist otherwise make it, and then move the MV file to the directory after naming it appropriately"
+
+echo "Moving outputs to JMMV parent directory"
+if ! [ -d ../../JMMV ]
+then
+mkdir ../../JMMV
+fi
+
+
+FileName="${SourceVid##*/}"
+FileNameP1="${FileName%.*}"
+mv -f ../JM_MVX_NoTexture/bin/vid/JMEncodedVideo.264 ../../JMMV/$FileNameP1'_Cropped.264'
+mv -f ../JM_MVX/bin/vid/JMEncodedVideo.264 ../../JMMV/$FileNameP1.264
+mv -f JMMV_mbmap.bin ../../JMMV/$FileNameP1'_JMMV.bin'
+mv -f ../JM_MVX_NoTexture/bin/stats.dat ../../JMMV/$FileNameP1'_JMStats_NoTexture.dat'
+mv -f ../JM_MVX_NoTexture/bin/FrameStats.dat ../../JMMV/$FileNameP1'_JMFrameStats_NoTexture.dat'
+mv -f ../JM_MVX/bin/stats.dat ../../JMMV/$FileNameP1'_JMStats_Orig.dat'
+mv -f ../JM_MVX/bin/FrameStats.dat ../../JMMV/$FileNameP1'_JMFrameStats_Orig.dat'
+
+cd ..
+
