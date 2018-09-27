@@ -104,7 +104,7 @@ HM config file=encoder_rate_accuracy.cfg, Source Video=v_BoxingPunchingBag_g05_c
 - Converting source video to YUV format
 - Producing cropped HEVC bitstream (encoder)
 - Extracting MVs from the cropped HEVC bitstream (decoder)
-- Original HM: encoding to produce rate (bps) per frame (optional) 
+- Original HM: encoding and then decoding to produce rates and stats (optional: for comparsion purposes)
 - Mapping MV to a grid according to CU positions
 - Moving outputs to HMMV parent directory
 ```
