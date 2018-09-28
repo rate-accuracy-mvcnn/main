@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This repository contains our public tool for producing cropped AVC and HEVC bitstream, extracting optical flow approximation (MVs), and two classification architectures (2D-CNN and 3D-CNN).
+This repository contains our public tools for producing cropped AVC and HEVC bitstreams and for extracting the sparse optical flow approximation (MVs) described in our paper.
 
 ## Prerequisites
 
@@ -11,7 +11,7 @@ In order to run thie code you will need:
 2. ffmpeg (tested with version 2.8.15)
 
 ## Cropped AVC/H.264 Bitstream and Optical Flow Approximation (MVs)
-To produce AVC/H.264 cropped bitstream and the approximated flow run
+To produce AVC/H.264 cropped bitstreams and the approximated flow run
 ```
 cd JM_MV_CNN
 ./JM_Cropped_MV_Stats -svid <input_video>
