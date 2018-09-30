@@ -6,7 +6,7 @@ This repository contains our public tools for producing cropped AVC and HEVC bit
 
 ## Prerequisites
 
-In order to compile and run the tools here you will need:
+In order to compile and run the tools provided in this repository you will need:
 1. Python 2.7 
 2. ffmpeg (version 2.8.15 or higher)
 
