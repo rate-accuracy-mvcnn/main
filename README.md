@@ -3,6 +3,7 @@
 ## Introduction
 
 This repository contains our public tools for producing cropped AVC and HEVC bitstreams to extract the sparse optical flow approximations  described in our ICIP paper:
+
 (Note: A journal publication based on the tools provided here has also been submitted and is currently under review)
 
 > @inproceedings{abbas2018rate,
