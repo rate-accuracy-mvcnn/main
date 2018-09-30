@@ -18,6 +18,7 @@ cd JM_MV_CNN
 ```
 
 The following encoding parameters can be set directly:
+
 Option | Description [default]
 ---|---
 --svid |  Input video [./v_BoxingPunchingBag_g05_c01.avi]
@@ -41,6 +42,7 @@ JM config file=encoder_option2.cfg, Source Video=v_BoxingPunchingBag_g05_c01.avi
 - Moving outputs to JMMV parent directory
 ```
 The JM_Cropped_MV_Stats generates the following outputs in the JMMV parent directory:
+
 File Name | Description
 ---|---
 x.264 | Compressed JM bitstream
@@ -89,6 +91,7 @@ HM config file=encoder_rate_accuracy.cfg, Source Video=v_BoxingPunchingBag_g05_c
 ```
 
 The HM_Cropped_MV_Stats generates the following outputs in the HMMV parent directory:
+
 File Name | Description
 ---|---
 x.bin | Compressed HM bitstream
