@@ -101,6 +101,6 @@ x_HMStats_NoTexture.dat | Summary of states for the cropped bitstream
 x_HMStats_Orig.dat | Summary of states for the original HM bitstream
 
 ## Training And Testing On H.264 And HEVC Approximated Optical Flow
-To train and test on the binary files produced using the tools described above please have a look at the publicly available previous work of our group:
+To train and test on the binary files produced using the tools described above please have a look at our previous work here:
 https://github.com/mvcnn/mvcnn
 
