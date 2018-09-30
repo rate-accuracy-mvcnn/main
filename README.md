@@ -4,7 +4,7 @@
 
 This repository contains our public tools for producing cropped AVC and HEVC bitstreams to extract the sparse optical flow approximation  described in our ICIP paper (a journal publication based on the work here has also been submitted and is under review):
 
-@inproceedings{abbas2018rate,
+> @inproceedings{abbas2018rate,
   title={Rate-Accuracy Trade-Off in Video Classification with Deep Convolutional Neural Networks},
   author={Abbas, Alhabib and Chadha, Aaron and Andreopoulos, Yiannis and Jubrani, Mohammad},
   booktitle={2018 25th IEEE International Conference on Image Processing (ICIP)},
@@ -22,20 +22,13 @@ In order to run thie code you will need:
 2. ffmpeg (tested with version 2.8.15)
 
 ## Cropped AVC/H.264 Bitstream and Optical Flow Approximation (MVs)
-To produce AVC/H.264 cropped bitstreams and the approximated flow run
+To produce AVC/H.264 cropped bitstreams and their corresponding approximated optical flow run:
 ```
 cd JM_MV_CNN
 ./JM_Cropped_MV_Stats -svid <input_video>
 ```
 
-The JM_Cropped_MV_Stats script takes an avi input video to produce the cropped bitsream and flow estimates according to the following steps:
-1. use ffmpeg to transcode the input video to YUV format with size WxH
-2. encoded YUV video using the modified AVC/H.264 JM refernce software (modified JM) to produced the cropped x264 bitsream
-3. decoded the cropped bitstream using the modified AVC/H.264 JM reference software to extract the MVs
-4. map these MVs to a Gird with a dimension set according to the resolution of the input video **WxH** and the **res** parameter
-
-Various encoding parameters can be set directly such as
-
+The following encoding parameters can be set directly:
 Option | Description [default]
 ---|---
 --svid |  Input video [./v_BoxingPunchingBag_g05_c01.avi]
@@ -46,19 +39,7 @@ Option | Description [default]
 --sr  |   search range [16]
 --res  |  resolution of the MB Grid (4,8,16) [8]
 
-The JM_Cropped_MV_Stats generate the following items in JMMV parent directory:
-
-File Name | Description
----|---
-x.264 | Compressed JM bitstream
-x_Cropped.264 | Cropped JM bitstream
-x_JMMV.bin | Flow estimate using JM MVs
-x_JMFrameStats_NoTexture.dat | States (including rate) per frame for the cropped bitstream
-x_JMStats_NoTexture.dat | Summary of states for the cropped bitstream
-x_JMFrameStats_Orig.dat | States (including rate) per frame for the bitstream produced by the original JM encoder
-x_JMStats_Orig.dat | Summary of states for the original JM bitstream
-
-Sample Output using default parameters:
+A successful run using the default parameters passes the following to stdout:
 ```
 %########################################################################################
 JM config file=encoder_option2.cfg, Source Video=v_BoxingPunchingBag_g05_c01.avi, QP=40, Search Range=16, MV Resolution=8
@@ -70,18 +51,25 @@ JM config file=encoder_option2.cfg, Source Video=v_BoxingPunchingBag_g05_c01.avi
 - Mapping MV to a grid according to Macroblocks positions
 - Moving outputs to JMMV parent directory
 ```
+The JM_Cropped_MV_Stats generates the following outputs in the JMMV parent directory:
+File Name | Description
+---|---
+x.264 | Compressed JM bitstream
+x_Cropped.264 | Cropped JM bitstream
+x_JMMV.bin | Flow estimate using JM MVs
+x_JMFrameStats_NoTexture.dat | States (including rate) per frame for the cropped bitstream
+x_JMStats_NoTexture.dat | Summary of states for the cropped bitstream
+x_JMFrameStats_Orig.dat | States (including rate) per frame for the bitstream produced by the original JM encoder
+x_JMStats_Orig.dat | Summary of states for the original JM bitstream
+
 ## Cropped HEVC Bitstream and Optical Flow Approximation (MVs)
-To produce HEVC cropped bitstream and the approximated flow run
+To produce HEVC cropped bitstreams and their corresponding approximated optical flow run:
 ```
 cd HM_MV_CNN
 ./HM_Cropped_MV_Stats -svid <input_video>
 ```
 
-The HM_Cropped_MV_Stats script takes an avi input video to produce the cropped bitsream and flow estimates according to the following steps:
-1. use ffmpeg to transcode the input video to YUV format with size WxH
-2. encoded YUV video using the modified HEVC refernce software (modified HM) to produced the cropped .bin bitsream
-3. decoded the cropped bitstream using the modified HEVC reference software to extract the MVs
-4. map these MVs to a Gird with a dimension set according to the resolution of the input video **WxH** and **res** parameter
+HM_Cropped_MV_Stats takes a .avi input to produce the cropped bitsream and flow estimates according to the following steps:
 
 Various encoding parameters can be set directly such as
 
@@ -97,17 +85,8 @@ Option | Description [default]
 --sr  |   search range [16]
 --res  |  resolution of the CU Grid (4,8,16) [8]
 
-The HM_Cropped_MV_Stats generate the following items in HMMV parent directory:
 
-File Name | Description
----|---
-x.bin | Compressed HM bitstream
-x_Cropped.bin | Cropped HM bitstream
-x_HMMV.bin | Flow estimate using HM MVs
-x_HMStats_NoTexture.dat | Summary of states for the cropped bitstream
-x_HMStats_Orig.dat | Summary of states for the original HM bitstream
-
-Sample Output using default parameters:
+A successful run using the default parameters passes the following to stdout:
 ```
 %########################################################################################
 HM config file=encoder_rate_accuracy.cfg, Source Video=v_BoxingPunchingBag_g05_c01.avi, QP=40, Search Range=16, MV Resolution=8
@@ -119,4 +98,17 @@ HM config file=encoder_rate_accuracy.cfg, Source Video=v_BoxingPunchingBag_g05_c
 - Mapping MV to a grid according to CU positions
 - Moving outputs to HMMV parent directory
 ```
+
+The HM_Cropped_MV_Stats generates the following outputs in the HMMV parent directory:
+File Name | Description
+---|---
+x.bin | Compressed HM bitstream
+x_Cropped.bin | Cropped HM bitstream
+x_HMMV.bin | Flow estimate using HM MVs
+x_HMStats_NoTexture.dat | Summary of states for the cropped bitstream
+x_HMStats_Orig.dat | Summary of states for the original HM bitstream
+
+## Training and testing on H.264 and HEVC approximated optical flow
+To train and test on the binary files produced using the tools described above please have a look at the publicly available previous work of our group:
+https://github.com/mvcnn/mvcnn
 
