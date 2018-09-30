@@ -2,8 +2,9 @@
 
 ## Introduction
 
-This repository contains our public tools for producing cropped AVC and HEVC bitstreams to extract the sparse optical flow approximation  described in our ICIP paper (a journal publication based on the work here has also been submitted and is under review):
+This repository contains our public tools for producing cropped AVC and HEVC bitstreams to extract the sparse optical flow approximations  described in our ICIP paper:
 
+(Note: A journal publication based on the tools provided here has also been submitted and is currently under review)
 > @inproceedings{abbas2018rate,
   title={Rate-Accuracy Trade-Off in Video Classification with Deep Convolutional Neural Networks},
   author={Abbas, Alhabib and Chadha, Aaron and Andreopoulos, Yiannis and Jubrani, Mohammad},
@@ -108,7 +109,7 @@ x_HMMV.bin | Flow estimate using HM MVs
 x_HMStats_NoTexture.dat | Summary of states for the cropped bitstream
 x_HMStats_Orig.dat | Summary of states for the original HM bitstream
 
-## Training and testing on H.264 and HEVC approximated optical flow
+## Training And Testing On H.264 And HEVC Approximated Optical Flow
 To train and test on the binary files produced using the tools described above please have a look at the publicly available previous work of our group:
 https://github.com/mvcnn/mvcnn
 
