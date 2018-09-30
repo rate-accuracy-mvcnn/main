@@ -2,20 +2,7 @@
 
 ## Introduction
 
-This repository contains our public tools for producing cropped AVC and HEVC bitstreams to extract the sparse optical flow approximations  described in our ICIP paper:
-
-(Note: A journal publication based on the tools provided here has also been submitted and is currently under review)
-
-> @inproceedings{abbas2018rate,
-  title={Rate-Accuracy Trade-Off in Video Classification with Deep Convolutional Neural Networks},
-  author={Abbas, Alhabib and Chadha, Aaron and Andreopoulos, Yiannis and Jubrani, Mohammad},
-  booktitle={2018 25th IEEE International Conference on Image Processing (ICIP)},
-  pages={793--797},
-  year={2018},
-  organization={IEEE}
-}
-
-If you use the tools available in the this repository please cite the work above.
+This repository contains our public tools for producing cropped AVC and HEVC bitstreams to extract the sparse optical flow approximations  described in our paper.
 
 ## Prerequisites
 
