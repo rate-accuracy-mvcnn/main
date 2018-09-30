@@ -6,9 +6,9 @@ This repository contains our public tools for producing cropped AVC and HEVC bit
 
 ## Prerequisites
 
-In order to run thie code you will need:
+In order to compile and run the tools here you will need:
 1. Python 2.7 
-2. ffmpeg (tested with version 2.8.15)
+2. ffmpeg (version 2.8.15 or higher)
 
 ## Cropped AVC/H.264 Bitstream and Optical Flow Approximation (MVs)
 To produce AVC/H.264 cropped bitstreams and their corresponding approximated optical flow run:
